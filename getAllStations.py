@@ -19,7 +19,7 @@ db = pymysql.connect(dbAddr,dbUser,dbPw,'bike_info_db',autocommit = True)
 cursor = db.cursor()
 
 def constructSQL(ID, name, bikes, lon, lat, time):
-    SQL = 'INSERT INTO Bikestations(StationID, StationName, StationFreeBikes, Lon, Lat, Timestamp) VALUES('+ID+', "'+name+'",'+bikes+',"'+lon+'","'+lat+'","'+time+'";'
+    SQL = 'INSERT INTO Bikestations(StationID, StationName, StationFreeBikes, Lon, Lat, Timestamp) VALUES('+ID+', "'+name+'",'+bikes+',"'+lon+'","'+lat+'","'+time+'");'
     return(SQL)
 
 # Get the parameters from request.json
