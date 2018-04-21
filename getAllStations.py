@@ -41,8 +41,8 @@ for i in data:
     stationLon = str(i['lon'])
     stationLat = str(i['lat'])
     timestamp = str(datetime.datetime.now()).split('.')[0]
-    SQL += constructSQL(stationID, stationName, bikesAvailable, stationLon, stationLat, timestamp)
-cursor.execute(SQL)
+    SQL = constructSQL(stationID, stationName, bikesAvailable, stationLon, stationLat, timestamp)
+    cursor.execute(SQL)
 
 
 
