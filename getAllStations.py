@@ -42,7 +42,7 @@ for i in data:
     stationLat = str(i['lat'])
     timestamp = str(datetime.datetime.now()).split('.')[0]
     SQL += constructSQL(stationID, stationName, bikesAvailable, stationLon, stationLat, timestamp)
-Cursor.execute(SQL)
+cursor.execute(SQL)
 
 
 
