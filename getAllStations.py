@@ -11,9 +11,9 @@ workingDirectory = os.path.dirname(os.path.abspath(__file__)) + '/'
 url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
 
 # Define database connection
-dbAddr = open(workingDirectory + 'mariadb/freebikes-dbAddr','r')readline().rstrip()
-dbUser = open(workingDirectory + 'mariadb/freebikes-dbUser','r')readline().rstrip()
-dbPw = open(workingDirectory + 'mariadb/freebikes-dbPw','r')readline().rstrip()
+dbAddr = open(workingDirectory + 'mariadb/freebikes-dbAddr','r').readline().rstrip()
+dbUser = open(workingDirectory + 'mariadb/freebikes-dbUser','r').readline().rstrip()
+dbPw = open(workingDirectory + 'mariadb/freebikes-dbPw','r').readline().rstrip()
 
 db = pymysql.connect(dbAddr,dbUser,dbPw,'bike_info_db',autocommit = True)
 cursor = db.cursor()
@@ -43,6 +43,7 @@ for i in data:
     timestamp = str(datetime.datetime.now()).split('.')[0]
     SQL += constructSQL(stationID, stationName, bikesAvailable, stationLon, stationLat, timestamp)
 Cursor.execute(SQL)
+
 
 
     
