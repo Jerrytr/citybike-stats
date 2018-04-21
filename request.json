@@ -1,0 +1,11 @@
+{
+  bikeRentalStation(id:"046") {
+    stationId
+    name
+    bikesAvailable
+    spacesAvailable
+    lat
+    lon
+    allowDropoff
+  }
+}
