@@ -1,0 +1,9 @@
+{
+  bikeRentalStations {
+    name
+    stationId
+    lon
+    lat
+    bikesAvailable
+  }
+}
