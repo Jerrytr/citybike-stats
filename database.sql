@@ -14,6 +14,5 @@ CREATE TABLE Bikestats (
     StationID VARCHAR(10) NOT NULL,
     Bikesfree INT,
     Timestamp datetime,
-    PRIMARY KEY(StationID),
     FOREIGN KEY(StationID) REFERENCES Bikestations(StationID)
 );
