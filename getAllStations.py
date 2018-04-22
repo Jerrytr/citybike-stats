@@ -1,5 +1,11 @@
 #!/usr/bin/python3.6
 
+"""
+This file is used to populate the Bikestations table
+with entries so that we have information on them for later use.
+Run only one
+"""
+
 import os
 import requests
 import json
@@ -14,34 +20,33 @@ url = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
 dbAddr = open(workingDirectory + 'mariadb/freebikes-dbAddr','r').readline().rstrip()
 dbUser = open(workingDirectory + 'mariadb/freebikes-dbUser','r').readline().rstrip()
 dbPw = open(workingDirectory + 'mariadb/freebikes-dbPw','r').readline().rstrip()
-
 db = pymysql.connect(dbAddr,dbUser,dbPw,'bike_info_db',autocommit = True)
 cursor = db.cursor()
 
-def constructSQL(ID, name, bikes, lon, lat, time):
-    SQL = 'INSERT INTO Bikestations(StationID, StationName, StationFreeBikes, Lon, Lat, Timestamp) VALUES("'+ID+'", "'+name+'",'+bikes+',"'+lon+'","'+lat+'","'+time+'");'
+# Function to create SQL statements
+def constructSQL(ID, name, lon, lat):
+    SQL = 'INSERT INTO Bikestations(StationID, StationName, StationLon, StationLat) VALUES("'+ID+'","'+name+'","'+lon+'","'+lat+'");'
     return(SQL)
 
 # Get the parameters from request.json
 payload = open(workingDirectory + 'getAllStations.json')
+
+# Post the API query
 headers = {'Content-Type': 'application/graphql'}
 r = requests.post(url=url, data=payload, headers=headers)
 jsonResponse = r.content
 result = json.loads(jsonResponse)
 
 data = result['data']['bikeRentalStations']
-#pprint(data)
 pprint(len(result['data']['bikeRentalStations']))
 SQL = ''
 
 for i in data:
     stationID = str(i['stationId'])
     stationName = i['name']
-    bikesAvailable = str(i['bikesAvailable'])
     stationLon = str(i['lon'])
     stationLat = str(i['lat'])
-    timestamp = str(datetime.datetime.now()).split('.')[0]
-    SQL = constructSQL(stationID, stationName, bikesAvailable, stationLon, stationLat, timestamp)
+    SQL = constructSQL(stationID, stationName, stationLon, stationLat)
     cursor.execute(SQL)
 
 

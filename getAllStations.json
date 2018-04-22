@@ -4,6 +4,5 @@
     stationId
     lon
     lat
-    bikesAvailable
   }
 }
