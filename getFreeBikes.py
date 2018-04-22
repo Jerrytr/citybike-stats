@@ -25,7 +25,7 @@ cursor = db.cursor()
 
 # Function to create SQL statements
 def constructSQL(ID, bikesFree, timestamp):
-    SQL = 'INSERT INTO Bikestats(StationID, Bikesfree) VALUES("'+ID+'",'+bikesFree+',"'+timestamp+'");'
+    SQL = 'INSERT INTO Bikestats(StationID, Bikesfree, Timestamp) VALUES("'+ID+'",'+bikesFree+',"'+timestamp+'");'
     return(SQL)
 
 # Get the parameters from request.json
