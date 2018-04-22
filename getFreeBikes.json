@@ -1,0 +1,6 @@
+{
+    bikeRentalStations {
+      stationId
+      bikesAvailable
+    }
+  }
